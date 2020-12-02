@@ -1,0 +1,261 @@
+<router-outlet></router-outlet>
+
+<div id="wrapper" style="background-color: white;">
+  <div class="d-flex flex-column" id="content-wrapper" style="background-color: white;">
+      <div id="content"> 
+          <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="background-color: white;">
+          <img src="https://static.thenounproject.com/png/168659-200.png" alt="Bandeira Itaquaquecetuba" style="width:50px;height:50px;">
+              <div class="text-uppercase font-weight-bold text-lg mb-1" style="margin-left: 0.5cm;"><span>MAPA DA VIOLÊNCIA DE SÃO PAULO</span></div>
+
+      </nav>
+      <div>
+    </div>
+      <div class="container-fluid" style="padding-right: 0px;">
+        <form>
+          <div class="d-sm-flex justify-content-center align-items-center mb-8">
+              <h3 class="text-dark mb-2 text-uppercase" styles="align-items-center">{{dadosDemograficos.nome}}</h3></div>
+              <hr>         
+              <div class="row" style="margin-top:20px;">
+              <div class="col">
+                  <div class="card border-left-primary py-2">
+                      <div class="card-body">
+                          <div class="row align-items-center no-gutters">
+                              <div class="col mr-2">
+                                <div class="text-uppercase font-weight-bold text-primary h6"><span>Lesão Corporal Seguida de Morte</span></div>
+                                <div class="text-uppercase text-primary h12"><span>0,65 CASOS POR 100 MIL HABITANTES</span></div>
+                                <div class="text-uppercase text-primary h12"><span>16º LUGAR ENTRE 645 MUNICÍPIOS</span></div>
+
+                            </div>
+                            <div class="col-auto"><img src="https://cdn2.iconfinder.com/data/icons/weby-interface-vol-1-1/512/s_warning-caution-exclamation-alert-attention-error-rounded-512.png" alt="Bandeira Itaquaquecetuba" style="width:40px;height:40px;"></div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col">
+                  <div class="card border-left-primary py-2">
+                      <div class="card-body">
+                          <div class="row align-items-center no-gutters">
+                              <div class="col mr-2">
+                                  <div class="text-uppercase text-primary font-weight-bold h6"><span>Lesão Corporal Seguida de Morte</span></div>
+                                  <div class="text-uppercase text-primary h12"><span>0,65 CASOS POR 100 MIL HABITANTES</span></div>
+                                  <div class="text-uppercase text-primary h12"><span>16º LUGAR ENTRE 645 MUNICÍPIOS</span></div>
+
+                              </div>
+                              <div class="col-auto"><img src="https://cdn2.iconfinder.com/data/icons/weby-interface-vol-1-1/512/s_warning-caution-exclamation-alert-attention-error-rounded-512.png" alt="Bandeira Itaquaquecetuba" style="width:40px;height:40px;"></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col">
+                  <div class="card border-left-primary py-2" style="margin-right:20px;">
+                      <div class="card-body">
+                          <div class="row align-items-center no-gutters">
+                              <div class="col mr-2">
+                                <div class="text-uppercase text-primary font-weight-bold h6"><span>Lesão Corporal Seguida de Morte</span></div>
+                                <div class="text-uppercase text-primary h12"><span>0,65 CASOS POR 100 MIL HABITANTES</span></div>
+                                <div class="text-uppercase text-primary h12"><span>16º LUGAR ENTRE 645 MUNICÍPIOS</span></div>
+
+                            </div>
+                            <div class="col-auto"><img src="https://cdn2.iconfinder.com/data/icons/weby-interface-vol-1-1/512/s_warning-caution-exclamation-alert-attention-error-rounded-512.png" alt="Bandeira Itaquaquecetuba" style="width:40px;height:40px;"></div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row" style="margin-right: 10px;">
+            <div class="col-lg-7 col-xl-8" style="margin-top:20px;">
+                <div class="card mb-4" style="border: none;">
+                    <div class="card-header bg-transparent">
+                        <div class="row align-items-center">
+                          <div class="col">
+                            <h2 class="text-primary font-weight-bold h5 m-0">Homicído Doloso</h2>
+                        </div>
+                        <div class="alt">
+                            <mat-form-field  style="margin-right: 25px; margin-top: 5px;">
+                                <mat-label>Indicador</mat-label>
+                                <mat-select min-width="0px;" matNativeControl>
+                                  <mat-option *ngFor="let ano of anos" [value]="ano">
+                                    {{ano}}
+                                  </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field  style="margin-right: 25px; margin-top: 5px;">
+                                <mat-label>Ano Inicial</mat-label>
+                                <mat-select min-width="0px;" matNativeControl>
+                                  <mat-option *ngFor="let ano of anos" [value]="ano">
+                                    {{ano}}
+                                  </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            A
+                            <mat-form-field style="margin-right: 25px; margin-left: 25px; margin-top: 5px;">
+                            <mat-label>Ano Final</mat-label>
+                            <mat-select min-width="0px;" matNativeControl>
+                              <mat-option *ngFor="let ano of anos" [value]="ano">
+                                {{ano}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <a class="btn btn-primary btn-sm" style="margin-left: 15px;" role="button">BUSCAR</a>
+                      </div>
+                        </div>
+                        
+                      </div>                            
+                      <div class="card-body">
+                        <div>
+                          <app-chart></app-chart>
+                        </div>
+                    </div>
+            </div>
+                      <hr>
+
+          </div>    
+              <div class="col-lg-5 col-xl-4" style="margin-top:20px;">
+                  <div class="card mb-4">
+                      <div class="card-header bg-transparent">
+                          <div class="row align-items-center">
+                            <div class="col">
+                              <h6 class="font-weight-bold h8 m-0">PERFIL</h6>
+                              <h2 class="text-primary font-weight-bold h5 m-0">{{dadosDemograficos.nome}}</h2>
+                            </div>
+                            <div class="dropdown no-arrow">
+                              <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                                <div> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Info_icon-72a7cf.svg/1200px-Info_icon-72a7cf.svg.png" alt="Bandeira Itaquaquecetuba" style="width:30px;height:30px;">
+                                </div>
+                              </button>
+                          </div>
+                          
+                          </div>
+                        </div>
+
+                      <div class="card-body">
+                          <div class="row" style="margin-top: 10px;">
+                              <div class="col">
+                                      <div class="text-uppercase text-primary font-weight-bold h8  mb-1">POPULAÇÃO (2020)</div>
+                                      <div class="text-dark font-weight-bold h8 mb-0">{{dadosDemograficos.pop_20}}</div>
+                              </div>
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>GINI (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.gini_10}} </span></div>
+                              </div>
+                          </div>
+
+                          <hr style="width:95%;text-align:center;margin-left:5">
+
+                          <div class="row" style="margin-top: 10px;">
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>PIB PER CAPITA (2013)</span></div>
+                                  <div class="text-dark font-weight-bold h8  mb-0"><span>{{dadosDemograficos.pib_pc_13}} </span></div>
+                              </div>
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>TAXA DE DESEMPREGO (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.desemprego_10}}</span></div>
+                              </div>
+                          </div>
+                          <hr style="width:95%;text-align:center;margin-left:5">
+
+                          <div class="row" style="margin-top: 10px;">
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>RENDA MÉDIA DOMICILIAR PER CAPITA (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.rendadc_10}}</span></div>
+                              </div>
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span><br>RAZÃO DE RENDA (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span><br>{{dadosDemograficos.razao_10}}</span></div>
+                              </div>
+                          </div>
+                          <hr style="width:95%;text-align:center;margin-left:5">
+
+                          <div class="row" style="margin-top: 10px;">
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>TAXA DE ANALFABETISMO (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.analfabetismo_10}}</span></div>
+                              </div>
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span><br>IDH-M (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.idhm_10}}</span></div>
+                              </div>
+                          </div>
+                          <hr style="width:95%;text-align:center;margin-left:5">
+
+                          <div class="row" style="margin-top: 10px;">
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>ESPERANÇA DE VIDA AO NASCER (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span><br>{{dadosDemograficos.evn_10}}</span></div>
+                              </div>
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>PROPORÇÃO DE PESSOAS DE BAIXA RENDA (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.ppbr_10}}</span></div>
+                              </div>
+                          </div>
+                          <hr style="width:95%;text-align:center;margin-left:5">
+
+                          <div class="row" style="margin-top: 10px;">
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>PORCENTAGEM de adolescentes de 15 a 17
+                                      anos de idade que tiveram filhos (2017)<p><br></p></span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p15e17f_17}}</span></div>
+                              </div>
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>porcentagem da população de 25 anos ou mais de idade com ensino fundamental completo (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p25ef_10}}</span></div>
+                              </div>
+                          </div>
+                          <hr style="width:95%;text-align:center;margin-left:5">
+                          <div class="row" style="margin-top: 10px;">
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>porcentagem da população de 25 anos ou mais de idade com ensino médio completo (2010)<p></span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p25em_10}}</span></div>
+                              </div>
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>porcentagem da população de 25 anos ou mais de idade com ensino superior completo (2010)<p></span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p25es_10}}</span></div>
+                              </div>
+                          </div>
+                          <hr style="width:95%;text-align:center;margin-left:5">
+                          <div class="row" style="margin-top: 10px;">
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>razão de dependência (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.rzd_10}}</span></div>
+                              </div>
+                              <div class="col">
+                                  <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>TAXA DE TRABALHO INFANTIL (2010)</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.tif_10}}</span></div>
+                              </div>
+                          </div>
+
+                      </div>
+                      <div class="row align-items-center no-gutters">
+                          <div id="mapid" style="width: 500px; height: 200px; border-style: solid;   border-color: white;"></div>
+
+                          <script type="text/javascript">
+
+                              var mymap = L.map('mapid').setView([-23.485833, -46.347778
+                          
+                          ], 13);
+                          
+                              L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                                  maxZoom: 18,
+                                  id: 'mapbox/streets-v11',
+                                  tileSize: 512,
+                                  zoomOffset: -1
+                              }).addTo(mymap);
+                          
+                              L.marker([-23.485833, -46.347778
+                          
+                          ]).addTo(mymap);
+                          
+                          
+                          </script>
+                  </div>
+
+
+                  </div>
+              </div>
+          </div>
+    </form>   
+    
+  </div>
+
+  <div>
+  </div>
