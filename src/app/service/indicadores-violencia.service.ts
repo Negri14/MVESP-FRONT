@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DadosMapa } from '../dto/dados_mapa.response';
 import {HttpParams} from "@angular/common/http";
+import { IndicadorViolencia } from '../dto/indicador_violencia.response';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,20 @@ export class IndicadoresViolenciaService {
     console.log(params);
     return this.http.get<Array<DadosMapa>>("https://mvesp.herokuapp.com/indicadorMapa", { params, headers:headers });
 
+
+  }
+
+  obterIndicadoresGrafico(codigoMunicipio: string, indicador:number, anoInicial:number, anoFinal:number) {
+
+    let params = new HttpParams()
+    .append('codigoMunicipio', codigoMunicipio)
+    .append('codigoIndicador', indicador.toString())
+    .append('anoInicial', anoInicial.toString())
+    .append('anoFinal', anoFinal.toString());
+
+    let headers = new HttpHeaders();
+    console.log(params);
+    return this.http.get<Array<IndicadorViolencia>>("https://mvesp.herokuapp.com/indicadorGrafico", { params, headers:headers }); 
 
   }
 
