@@ -3727,6 +3727,8 @@
                                                     </g><!-- #municipio -->
 
                                                       <g id="key" class="label">
+                                                             <text x="10" y="340">Ocorrências por 100 mil habitantes</text> 
+
                                                             <rect x="10" y="350" width="20" height="20" style="fill:'#ead3d7'"/>
                                                             <rect x="10" y="375" width="20" height="20" style="fill:'#cc6674'"/>
                                                             <rect x="10" y="400" width="20" height="20" style="fill:'#993341'"/>

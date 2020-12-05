@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChartComponent } from './chart/chart.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSortModule,
     HttpClientModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')

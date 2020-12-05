@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DadosMapa } from '../dto/dados_mapa.response';
 import {HttpParams} from "@angular/common/http";
 import { IndicadorViolencia } from '../dto/indicador_violencia.response';
+import { IndicadoresMunicipio } from '../dto/indicadores_municipio';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,16 @@ export class IndicadoresViolenciaService {
     let headers = new HttpHeaders();
     console.log(params);
     return this.http.get<Array<IndicadorViolencia>>("https://mvesp.herokuapp.com/indicadorGrafico", { params, headers:headers }); 
+
+  }
+
+
+  obterIndicadoresMunicipio(codigoMunicipio: string) {
+    let params = new HttpParams()
+    .append('codigoMunicipio', codigoMunicipio)
+    let headers = new HttpHeaders();
+    console.log(params);
+    return this.http.get<Array<IndicadoresMunicipio>>("https://mvesp.herokuapp.com/listaIndicadoresMunicipio", { params, headers:headers }); 
 
   }
 

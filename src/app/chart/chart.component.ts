@@ -92,8 +92,6 @@ export class ChartComponent implements OnInit {
       yAxes: [{
         offset: true,
         ticks: {
-          min: 0,
-          stepSize: 1
         }
       }]
     }
