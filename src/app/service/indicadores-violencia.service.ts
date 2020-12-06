@@ -5,6 +5,7 @@ import { DadosMapa } from '../dto/dados_mapa.response';
 import {HttpParams} from "@angular/common/http";
 import { IndicadorViolencia } from '../dto/indicador_violencia.response';
 import { IndicadoresMunicipio } from '../dto/indicadores_municipio';
+import { Score } from '../dto/score.response';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,6 @@ export class IndicadoresViolenciaService {
     .append('anoFinal', anoFinal.toString());
 
     let headers = new HttpHeaders();
-    console.log(params);
     return this.http.get<Array<IndicadorViolencia>>("https://mvesp.herokuapp.com/indicadorGrafico", { params, headers:headers }); 
 
   }
@@ -46,8 +46,15 @@ export class IndicadoresViolenciaService {
     let params = new HttpParams()
     .append('codigoMunicipio', codigoMunicipio)
     let headers = new HttpHeaders();
-    console.log(params);
     return this.http.get<Array<IndicadoresMunicipio>>("https://mvesp.herokuapp.com/listaIndicadoresMunicipio", { params, headers:headers }); 
+
+  }
+
+  obterScore(ano: number) {
+    let params = new HttpParams()
+    .append('ano', ano.toString())
+    let headers = new HttpHeaders();
+    return this.http.get<Array<Score>>("https://mvesp.herokuapp.com/listaScore", { params, headers:headers }); 
 
   }
 

@@ -19,6 +19,7 @@ import { ChartComponent } from './chart/chart.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatSortModule } from '@angular/material/sort';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatSortModule } from '@angular/material/sort';
     ReactiveFormsModule,
     FormsModule,
     MatSortModule,
+    NgxMatSelectSearchModule,
     HttpClientModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
