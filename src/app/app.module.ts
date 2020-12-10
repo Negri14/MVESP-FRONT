@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent, DialogCinco, DialogDemografia, DialogDois, DialogExtra, DialogQuatro, DialogSeis, DialogTres, DialogUm } from './dashboard/dashboard.component';
 import {MatSelectModule} from '@angular/material/select';
 import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
@@ -20,6 +20,9 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatDialogModule, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from  '@angular/material/dialog';
+import { ScoreComponent } from './score/score.component';
+
 
 @NgModule({
   declarations: [
@@ -27,8 +30,17 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     DashboardComponent,
     MapComponent,
     HomeComponent,
-    ChartComponent
-
+    ChartComponent,
+    DialogDemografia,
+    DialogDemografia,
+    DialogUm,
+    DialogDois,
+    DialogTres,
+    DialogQuatro,
+    DialogCinco,
+    DialogSeis,
+    DialogExtra,
+    ScoreComponent
     ],
   imports: [
     BrowserAnimationsModule,
@@ -44,6 +56,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     FormsModule,
     MatSortModule,
     NgxMatSelectSearchModule,
+    MatDialogModule,
     HttpClientModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')

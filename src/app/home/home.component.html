@@ -15,13 +15,7 @@
                   <a class="nav-link text-lg" style="border-right:solid 1px #D3D3D3;" href="#">INÍCIO </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-lg" style="border-right:solid 1px #D3D3D3	;"href="#">O SCORE DE VIOLÊNCIA</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-lg" style="border-right:solid 1px #D3D3D3	;"href="#">SOBRE</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-lg" href="#">CONTATO</a>
+                  <a class="nav-link text-lg"  (click)="irParaScore()">O SCORE DE VIOLÊNCIA</a>
                 </li>
               </ul>
             </div>
@@ -29,7 +23,7 @@
     </div>
     <div class="row" style="width: 100%; height:300px;">
     <div class="t0" style="width: 100%; height:300px;">
-        <img class="y14" src="https://www.goodfreephotos.com/albums/brazil/sao-paulo/full-panoramic-of-sao-paulo-brazil.jpg" alt="Bandeira Itaquaquecetuba" style="width: 100%;">
+        <img class="y14" src="https://i.ibb.co/Z1crXsZ/city-1142159-1920.jpg" alt="Bandeira Itaquaquecetuba" style="width: 100%;">
     </div>
   </div>
 
@@ -51,8 +45,11 @@
             <div class="col">
             <mat-form-field style="margin-right: 25px; margin-top: 5px; align-content: center;">
                 <mat-label>Município</mat-label>
-                <mat-select matNativeControl (selectionChange)="definirMunicipio($event.value)">
-                  <mat-option *ngFor="let municipio of municipios" [value]="municipio.codigo">
+                <mat-select matNativeControl [(value)]="codigo_municipio" (selectionChange)="definirMunicipio($event.value)">
+                  <mat-option>
+                    <ngx-mat-select-search placeholderLabel="Buscar" noEntriesFoundLabel = "Nenhum município encontrado" [formControl]="filteredMunicipioCtrl"></ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option *ngFor="let municipio of filteredMunicipios" [value]="municipio.codigo">
                     {{municipio.nome}}
                   </mat-option>
                 </mat-select>
@@ -68,8 +65,16 @@
             </div>
         </div>
 
-  <div style="margin-bottom: 200px; align-content: center;">
-
+  <div style="margin-bottom: 50px; margin-right: 130px; margin-left:130px; align-content: center;">
+    <div style="margin-top: 50px; align-content: center;">
+      <h5 class="text-center text-dark  h8 m-0">
+      <p>No <b>Mapa da Violência do Estado de São Paulo </b>você tem acesso aos dados sobre a violência nos 645 municípios do estado de São Paulo de maneira simples e dinâmica. Utilizando o combo acima você poderá encontrar as informações de um município específico e utilizando o mapa abaixo você terá uma visão mais geral do estado de São Paulo. 
+     </p>
+     <br>
+     <p>O MVESP também divulga o <b>Score de Violência</b>, uma indicador que mede o nível de criminalidade do município. A metologia utilizada para calcular a pontuação pode ser encontrada na página O Score de Violência.
+    Durante a navegação pelo site você encontrará  botões <img src="https://i.ibb.co/PxWJnkS/dica.png"> com dicas de segurança e <img src="https://i.ibb.co/LRnjD8F/info.png"> com explicações dos termos utilizados.</p>
+    </h5>
+  </div>
   </div>
 
             <div class="row" style="margin-left:5px ;margin-right:5px;">
@@ -83,7 +88,7 @@
                               <div class="alt">
                                 <mat-form-field style="margin-right: 25px; margin-top: 5px;">
                                   <mat-label>Indicador</mat-label>
-                                  <mat-select matNativeControl (selectionChange)="alterarIndicador($event.value)">
+                                  <mat-select matNativeControl [(value)]="id_indicador_inicial" (selectionChange)="alterarIndicador($event.value)">
                                     <mat-option *ngFor="let indicador of indicadores" [value]="indicador.id">
                                       {{indicador.indicador_formatado}}
                                     </mat-option>
@@ -91,7 +96,7 @@
                               </mat-form-field>
                               <mat-form-field>
                                 <mat-label>Ano</mat-label>
-                                <mat-select min-width="0px;" matNativeControl (selectionChange)="alterarAno($event.value)">
+                                <mat-select min-width="0px;" [(value)]="ano_inicial" matNativeControl (selectionChange)="alterarAno($event.value)">
                                   <mat-option *ngFor="let ano of anos" [value]="ano">
                                     {{ano}}
                                   </mat-option>

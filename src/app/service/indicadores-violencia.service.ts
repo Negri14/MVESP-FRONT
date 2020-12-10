@@ -6,6 +6,7 @@ import {HttpParams} from "@angular/common/http";
 import { IndicadorViolencia } from '../dto/indicador_violencia.response';
 import { IndicadoresMunicipio } from '../dto/indicadores_municipio';
 import { Score } from '../dto/score.response';
+import { IndicadorPrincipal } from '../dto/dados-principais.response';
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,74 @@ export class IndicadoresViolenciaService {
 
   }
 
+  obterPrincipais(codigoMunicipio: string) {
+    let params = new HttpParams()
+    .append('codigoMunicipio', codigoMunicipio)
+    let headers = new HttpHeaders();
+    return this.http.get<Array<IndicadorPrincipal>>("https://mvesp.herokuapp.com/principais", { params, headers:headers }); 
+
+  }
+
+  obterCSV(codigoMunicipio: string) {
+    let params = new HttpParams()
+    .append('codigoMunicipio', codigoMunicipio)
+    let headers = new HttpHeaders();
+    return this.http.get<Array<Score>>("https://mvesp.herokuapp.com/csv", { params, headers:headers }); 
+  }
+
+  obterDadosCompletos(codigoMunicipio: string) {
+    let params = new HttpParams()
+    .append('codigoMunicipio', codigoMunicipio)
+    let headers = new HttpHeaders();
+    return this.http.get<Array<IndicadoresMunicipio>>("https://mvesp.herokuapp.com/listaIndicadoresMunicipio", { params, headers:headers }); 
+
+  }
+
+  downloadFile(municipio, codigoMunicipio: string) {
+    let filename = `${municipio}_Indicadores_Violencia`
+    let data = [];
+    this.obterCSV(codigoMunicipio).subscribe(result=>{
+      data = result
+      let csvData = this.ConvertToCSV(data, ['codigo','nome', 'ano', 'indicador', 'indicador_Formatado', 'janeiro', 'fevereiro', 'marco','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro','total','por100Mil', 'ranking']);
+      console.log(csvData)
+      let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
+      let dwldLink = document.createElement("a");
+      let url = URL.createObjectURL(blob);
+      let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
+      if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
+          dwldLink.setAttribute("target", "_blank");
+      }
+      dwldLink.setAttribute("href", url);
+      dwldLink.setAttribute("download", filename + ".csv");
+      dwldLink.style.visibility = "hidden";
+      document.body.appendChild(dwldLink);
+      dwldLink.click();
+      document.body.removeChild(dwldLink);
+      });
+}
+
+  ConvertToCSV(objArray, headerList) {
+    let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    let str = '';
+    let row ='';
+
+    for (let index in headerList) {
+        row += headerList[index] + ',';
+    }
+    row = row.slice(0, -1);
+    str += row + '\r\n';
+    for (let i = 0; i < array.length; i++) {
+        let line = '';
+        for (let index in headerList) {
+           let head = headerList[index];
+
+            line += array[i][head]+',';
+        }
+        line = line.slice(0, -1);
+
+        str += line + '\r\n';
+    }
+    return str;
+}
 }
 

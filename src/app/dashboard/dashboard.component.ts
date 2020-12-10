@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { IndicadorPrincipal } from '../dto/dados-principais.response';
 import { DadosMapa } from '../dto/dados_mapa.response';
 import { Indicador } from '../dto/indicador.response';
 import { IndicadoresMunicipio } from '../dto/indicadores_municipio';
@@ -20,7 +22,14 @@ import { IndicadoresViolenciaService } from '../service/indicadores-violencia.se
 
 export class DashboardComponent implements OnInit {
 
-  constructor(private router: Router, private demografiaService: IndicadoresDemografiaService, private indicadoresViolenciaService: IndicadoresViolenciaService, private indicadoresService: IndicadorService) { this.codigoMunicipio = this.router.getCurrentNavigation().extras.state.codigoMunicipio }
+  constructor
+  (
+    private router: Router, 
+    private demografiaService: IndicadoresDemografiaService, 
+    private indicadoresViolenciaService: IndicadoresViolenciaService, 
+    private indicadoresService: IndicadorService,
+    public dialog: MatDialog
+    ) { this.codigoMunicipio = this.router.getCurrentNavigation().extras.state.codigoMunicipio }
 
   codigoMunicipio = '';
   anos = [2015,2016,2017,2018,2019,2020]
@@ -30,6 +39,10 @@ export class DashboardComponent implements OnInit {
 
   indicador_selecionado = 'SCORE DE VIOLÊNCIA'
   ano_selecionado = 2020;
+  
+  irParaScore(): void {
+    this.router.navigateByUrl('score');
+}
 
 
   ano_inicio = 2020;
@@ -63,6 +76,9 @@ export class DashboardComponent implements OnInit {
 
   dm : DadosMapa;
 
+  downloadCSV() {
+    this.indicadoresViolenciaService.downloadFile(this.dadosDemograficos.nome, this.codigoMunicipio);
+  }
 
   public buscarDadosMapa() {
 
@@ -82,6 +98,9 @@ export class DashboardComponent implements OnInit {
    doFilter(e) {
     console.log(e);
   }
+
+  indicadorPrincipal: IndicadorPrincipal[];
+  
   ngOnInit(): void {
 
 
@@ -94,6 +113,11 @@ export class DashboardComponent implements OnInit {
       this.dataSource.paginator = this.paginator
 
 
+    });
+
+    this.indicadoresViolenciaService.obterPrincipais(this.codigoMunicipio).subscribe(result=>{
+      this.indicadorPrincipal = result;
+      console.log(this.indicadorPrincipal);
     });
     this.demografiaService.indicadorDemografia(this.codigoMunicipio).subscribe(result => {
       this.dadosDemograficos = result[0];
@@ -113,6 +137,10 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  abrirDialogDemografia() {
+    const dialogDemografia = this.dialog.open(DialogDemografia);
+  }
+
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     let i = this.indicadores.filter(x=> x.id == 20);
@@ -120,6 +148,87 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  abrirDica(id: number) {
+
+    console.log(id);
+
+    if ([16,5,21].includes(id)) {
+      const dialogDemografia = this.dialog.open(DialogUm);
+
+    } else if ([4,13,15,11,20].includes(id)) {
+      const dialogDemografia = this.dialog.open(DialogDois);
+
+    } else if ([7].includes(id)) {
+      const dialogDemografia = this.dialog.open(DialogTres);
+
+    } else if ([8,23,22].includes(id)) {
+      const dialogDemografia = this.dialog.open(DialogQuatro);
+
+    } else if ([3,19,14].includes(id)) {
+      const dialogDemografia = this.dialog.open(DialogCinco);
+
+    } else if ( [6].includes(id)) {
+      const dialogDemografia = this.dialog.open(DialogSeis);
+
+    }   else {
+      const dialogDemografia = this.dialog.open(DialogExtra);
+    }
+
+
+  }
+
   element = {crime1:"ROUBO", crime1Qnt: 10}
 
 }
+@Component({
+  selector: 'dialog-demografia',
+  templateUrl: 'dialog-demografia.html',
+})
+export class DialogDemografia {}
+
+
+@Component({
+  selector: 'dialog-dica-um',
+  templateUrl: 'dialog-dica-um.html',
+})
+export class DialogUm {}
+
+@Component({
+  selector: 'dialog-dica-dois',
+  templateUrl: 'dialog-dica-dois.html',
+})
+export class DialogDois {}
+
+@Component({
+  selector: 'dialog-dica-tres',
+  templateUrl: 'dialog-dica-tres.html',
+})
+export class DialogTres {}
+
+@Component({
+  selector: 'dialog-dica-quatro',
+  templateUrl: 'dialog-dica-quatro.html',
+})
+export class DialogQuatro {}
+
+@Component({
+  selector: 'dialog-dica-cinco',
+  templateUrl: 'dialog-dica-cinco.html',
+})
+export class DialogCinco {}
+
+@Component({
+  selector: 'dialog-dica-seis',
+  templateUrl: 'dialog-dica-seis.html',
+})
+export class DialogSeis {}
+
+@Component({
+  selector: 'dialog-extra',
+  templateUrl: 'dialog-extra.html',
+})
+export class DialogExtra {}
+
+
+
+

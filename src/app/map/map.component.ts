@@ -14,7 +14,7 @@ export class MapComponent implements OnInit {
   @Input()
   public ranking = [];
 
-
+  legenda = 'Ocorrências por 100 mil habitantes'
 
   colors = ['#DC143C', '#FFA07A',  '#F08080'];
 
@@ -33,6 +33,7 @@ export class MapComponent implements OnInit {
     console.log(this.score);
     console.log(this.ranking);
     
+    
     if (this.ranking.length == 0) {
       var list = document.getElementsByClassName("st2");
 
@@ -43,7 +44,7 @@ export class MapComponent implements OnInit {
     }
 
     if(!this.score || this.ranking[0].length > 4) {
-
+      this.legenda = 'Ocorrências por 100 mil habitantes';
       this.ranking.forEach(x => {
         let valor = x['por100Mil'];
         let color = '#9b9b9';
@@ -62,6 +63,8 @@ export class MapComponent implements OnInit {
         var e = document.getElementById(x['codigo']).setAttribute('fill', color);  
       });
     } else {
+      this.legenda = 'Score de Violência';
+
 
       this.ranking.forEach(x => {
         let valor = x['score'];
@@ -98,11 +101,20 @@ export class MapComponent implements OnInit {
     console.log('x_x',e.path[0].id)
     this.last = e.path[0].id;
     let index = this.ranking.findIndex(x => x['codigo'] === e.path[0].id);
+    
     if (this.last == e.path[0].id) {
+      if(!this.score || this.ranking[0].length > 4) {
+ 
       this.posicao = this.ranking[index]['ranking'];
       this.nomeMunicipio = this.ranking[index]['nome'];
       this.valor = this.ranking[index]['por100Mil'];  
+    } else {
+      this.posicao = this.ranking[index]['ranking'];
+      this.nomeMunicipio = this.ranking[index]['nome'];
+      this.valor = this.ranking[index]['score'];  
+
     }
+  }
 
   }
 

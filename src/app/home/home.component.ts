@@ -33,7 +33,8 @@ export class HomeComponent implements OnInit {
 
   ranking = [];
   public dataSource = new MatTableDataSource<DadosMapa>(this.ranking);
-  
+  public dataSourceFiltro = new MatTableDataSource<DadosMapa>(this.ranking);
+
 
   public score = true;
 
@@ -44,6 +45,7 @@ export class HomeComponent implements OnInit {
   indicadores : Indicador[];
 
   municipios : Municipio[];
+  filteredMunicipios: Municipio[] = [];
 
   indicadorSelecionado = 24;
   anoSelecionado = 2020;
@@ -83,20 +85,23 @@ export class HomeComponent implements OnInit {
   indicador_selecionado = 'SCORE DE VIOLÊNCIA'
   ano_selecionado = 2020;
 
-  is = '';
-  as = 0;
+  is = 'SCORE DE VIOLÊNCIA';
+  as = 2020;
   alterarIndicador(e) {
     let t = this.indicadores.filter(x => x.id == e);
     this.is = t[0].indicador_formatado.toUpperCase();
     this.indicadorSelecionado = e;
   }
 
-  codigoMunicipio = '';
+  codigoMunicipio = '3500105';
 
   definirMunicipio(e) {
     this.codigoMunicipio = e;
   }
   
+  irParaScore(): void {
+    this.router.navigateByUrl('score');
+}
 
   irParaHome() {
     this.router.navigate(['dashboard'], { state: {codigoMunicipio: this.codigoMunicipio}});
@@ -108,10 +113,19 @@ export class HomeComponent implements OnInit {
   }
 
   public dataSourceScore = new MatTableDataSource<Score>([]);
+  public dataSourceScoreFiltro = new MatTableDataSource<Score>([]);
+
+  public filteredMunicipioCtrl: FormControl = new FormControl();
 
 
 
   ngOnInit(): void {
+
+    this.filteredMunicipioCtrl.valueChanges
+   .subscribe(() => {
+      this.filtrarMunicipios();
+      console.log('mudou');
+    });
 
     this.iService.obterListaIndicadoresMapa().subscribe(result => this.indicadores = result);
     this.dataSource.paginator = this.paginator;
@@ -119,6 +133,8 @@ export class HomeComponent implements OnInit {
 
     this.service.obterMunicipios().subscribe(result => {
       console.log(result);
+      result.forEach(x=> this.filteredMunicipios.push(x));
+      console.log('k_k', this.filteredMunicipios);
       this.municipios = result
     });
 
@@ -130,8 +146,30 @@ export class HomeComponent implements OnInit {
 
   }
 
+  codigo_municipio = '3500105';
+
+  id_indicador_inicial = 24;
+  ano_inicial = "2020";
+
+  filtrarMunicipios() {
+    this.filteredMunicipios = []
+    this.municipios.forEach(x => this.filteredMunicipios.push(x));
+    this.filteredMunicipios = this.filteredMunicipios.filter(x => x.nome.toLocaleLowerCase().includes(this.filteredMunicipioCtrl.value.toLocaleLowerCase()));
+  }
+
+
   doFilter(e) {
-    console.log(e);
+
+    if (this.score) {
+
+      this.dataSourceScore.filter = e;
+
+    } else {
+    
+    this.dataSource.filter = e;
+
+    }
+
   }
 
    ngAfterViewInit() {

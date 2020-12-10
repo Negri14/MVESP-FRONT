@@ -3,11 +3,24 @@
 <div id="wrapper" style="background-color: white;">
   <div class="d-flex flex-column" id="content-wrapper" style="background-color: white;">
       <div id="content"> 
-          <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="background-color: white;">
-          <img src="https://static.thenounproject.com/png/168659-200.png" alt="Bandeira Itaquaquecetuba" style="width:50px;height:50px;">
-              <div class="text-uppercase font-weight-bold text-lg mb-1" style="margin-left: 0.5cm;"><span>MAPA DA VIOLÊNCIA DE SÃO PAULO</span></div>
-
-      </nav>
+        <nav class="navbar shadow navbar-expand-lg navbar-light bg-white" style="margin-bottom: 50px;">
+          <img src="https://static.thenounproject.com/png/168659-200.png" alt="Bandeira Itaquaquecetuba" style="width:50px;height:50px; padding-bottom: 0;">
+          <div class="text-uppercase font-weight-bold text-lg" style="margin-left: 0.5cm;"><span>MAPA DA VIOLÊNCIA DO ESTADO DE SÃO PAULO</span></div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 50px;">
+            <ul class="navbar-nav ml-auto order-3">
+              <li class="nav-item">
+                <a class="nav-link text-lg" style="border-right:solid 1px #D3D3D3;" href="#">INÍCIO </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-lg" style="border-right:solid 1px #D3D3D3	;" (click)="irParaScore()">O SCORE DE VIOLÊNCIA</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
       <div>
     </div>
       <div class="container-fluid" style="padding-right: 0px;">
@@ -21,12 +34,15 @@
                       <div class="card-body">
                           <div class="row align-items-center no-gutters">
                               <div class="col mr-2">
-                                <div class="text-uppercase font-weight-bold text-primary h6"><span>Lesão Corporal Seguida de Morte</span></div>
-                                <div class="text-uppercase text-primary h12"><span>445454 CASOS (0,65 POR 100 MIL HABITANTES)</span></div>
-                                <div class="text-uppercase text-primary h12"><span>16º LUGAR ENTRE 645 MUNICÍPIOS</span></div>
+                                <div class="text-uppercase font-weight-bold text-primary h6"><span>{{indicadorPrincipal[0].indicador_Formatado}}</span></div>
+                                <div class="text-uppercase text-dark h12"><span>{{indicadorPrincipal[0].total}} CASOS ({{indicadorPrincipal[1].por100Mil | number:'1.2-2' }} POR 100 MIL HABITANTES)</span></div>
+                                <div class="text-uppercase text-dark h12"><span>{{indicadorPrincipal[0].ranking}}º LUGAR ENTRE 645 MUNICÍPIOS</span></div>
 
                             </div>
-                            <div class="col-auto"><img src="https://cdn2.iconfinder.com/data/icons/weby-interface-vol-1-1/512/s_warning-caution-exclamation-alert-attention-error-rounded-512.png" alt="Bandeira Itaquaquecetuba" style="width:40px;height:40px;"></div>
+                            <button mat-mini-fab color="primary" style="color: white;" aria-label="Example icon button with a menu icon" (click)="abrirDica(indicadorPrincipal[0].id_Indicador)">
+                              <div> <img src="https://cdn2.iconfinder.com/data/icons/weby-interface-vol-1-1/512/s_warning-caution-exclamation-alert-attention-error-rounded-512.png" alt="Bandeira Itaquaquecetuba" style="width:30px;height:30px;">
+                              </div>
+                            </button>
                         </div>
                       </div>
                   </div>
@@ -36,13 +52,16 @@
                       <div class="card-body">
                           <div class="row align-items-center no-gutters">
                               <div class="col mr-2">
-                                  <div class="text-uppercase text-primary font-weight-bold h6"><span>Lesão Corporal Seguida de Morte</span></div>
-                                  <div class="text-uppercase text-primary h12"><span>0,65 CASOS POR 100 MIL HABITANTES</span></div>
-                                  <div class="text-uppercase text-primary h12"><span>16º LUGAR ENTRE 645 MUNICÍPIOS</span></div>
-
+                                  <div class="text-uppercase text-primary font-weight-bold h6"><span>{{indicadorPrincipal[1].indicador_Formatado}}</span></div>
+                                  <div class="text-uppercase  text-dark h12"><span>{{indicadorPrincipal[1].total}} CASOS ({{indicadorPrincipal[1].por100Mil | number:'1.2-2' }} POR 100 MIL HABITANTES)</span></div>
+                                  <div class="text-uppercase text-dark h12"><span>{{indicadorPrincipal[1].ranking}}º LUGAR ENTRE 645 MUNICÍPIOS</span></div>
+  
                               </div>
-                              <div class="col-auto"><img src="https://cdn2.iconfinder.com/data/icons/weby-interface-vol-1-1/512/s_warning-caution-exclamation-alert-attention-error-rounded-512.png" alt="Bandeira Itaquaquecetuba" style="width:40px;height:40px;"></div>
-                          </div>
+                              <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="abrirDica(indicadorPrincipal[1].id_Indicador)">
+                                <div> <img src="https://cdn2.iconfinder.com/data/icons/weby-interface-vol-1-1/512/s_warning-caution-exclamation-alert-attention-error-rounded-512.png" alt="Bandeira Itaquaquecetuba" style="width:30px;height:30px;">
+                                </div>
+                              </button>
+                            </div>
                       </div>
                   </div>
               </div>
@@ -51,13 +70,16 @@
                       <div class="card-body">
                           <div class="row align-items-center no-gutters">
                               <div class="col mr-2">
-                                <div class="text-uppercase text-primary font-weight-bold h6"><span>Lesão Corporal Seguida de Morte</span></div>
-                                <div class="text-uppercase text-primary h12"><span>0,65 CASOS POR 100 MIL HABITANTES</span></div>
-                                <div class="text-uppercase text-primary h12"><span>16º LUGAR ENTRE 645 MUNICÍPIOS</span></div>
+                                <div class="text-uppercase text-primary font-weight-bold h6"><span>{{indicadorPrincipal[2].indicador_Formatado}}</span></div>
+                                <div class="text-uppercase text-dark h12"><span>{{indicadorPrincipal[2].total}} CASOS ({{indicadorPrincipal[2].por100Mil | number:'1.2-2' }} POR 100 MIL HABITANTES)</span></div>
+                                <div class="text-uppercase text-dark h12"><span>{{indicadorPrincipal[2].ranking}}º LUGAR ENTRE 645 MUNICÍPIOS</span></div>
 
                             </div>
-                            <div class="col-auto"><img src="https://cdn2.iconfinder.com/data/icons/weby-interface-vol-1-1/512/s_warning-caution-exclamation-alert-attention-error-rounded-512.png" alt="Bandeira Itaquaquecetuba" style="width:40px;height:40px;"></div>
-                        </div>
+                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="abrirDica(indicadorPrincipal[2].id_Indicador)">
+                              <div> <img src="https://cdn2.iconfinder.com/data/icons/weby-interface-vol-1-1/512/s_warning-caution-exclamation-alert-attention-error-rounded-512.png" alt="Bandeira Itaquaquecetuba" style="width:30px;height:30px;">
+                              </div>
+                            </button>
+                      </div>
                       </div>
                   </div>
               </div>
@@ -116,7 +138,7 @@
                                 <h2 class="text-primary font-weight-bold h5 m-0"></h2>
                             </div>
                             <div class="alt">
-                                <a class="btn btn-primary btn-sm" style="margin-left: 10px; color:white" role="button">EXPORTAR DADOS DETALHADOS</a>
+                                <a class="btn btn-primary btn-sm" (click)="downloadCSV()" style="margin-left: 10px; color:white" role="button">EXPORTAR DADOS DETALHADOS</a>
                           </div>
                             </div>
                             
@@ -174,7 +196,7 @@
                               <h2 class="text-primary font-weight-bold h5 m-0">{{dadosDemograficos.nome}}</h2>
                             </div>
                             <div class="dropdown no-arrow">
-                              <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                              <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="abrirDialogDemografia()">
                                 <div> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Info_icon-72a7cf.svg/1200px-Info_icon-72a7cf.svg.png" alt="Bandeira Itaquaquecetuba" style="width:30px;height:30px;">
                                 </div>
                               </button>
@@ -191,7 +213,7 @@
                               </div>
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>GINI (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.gini_10}} </span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.gini_10 | number:'1.2-2' }} </span></div>
                               </div>
                           </div>
 
@@ -200,11 +222,11 @@
                           <div class="row" style="margin-top: 10px;">
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>PIB PER CAPITA (2013)</span></div>
-                                  <div class="text-dark font-weight-bold h8  mb-0"><span>{{dadosDemograficos.pib_pc_13}} </span></div>
+                                  <div class="text-dark font-weight-bold h8  mb-0"><span>{{dadosDemograficos.pib_pc_13 | number:'1.2-2' }} </span></div>
                               </div>
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>TAXA DE DESEMPREGO (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.desemprego_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.desemprego_10 | number:'1.2-2' }}</span></div>
                               </div>
                           </div>
                           <hr style="width:95%;text-align:center;margin-left:5">
@@ -212,11 +234,11 @@
                           <div class="row" style="margin-top: 10px;">
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>RENDA MÉDIA DOMICILIAR PER CAPITA (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.rendadc_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.rendadc_10 | number:'1.2-2' }}</span></div>
                               </div>
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span><br>RAZÃO DE RENDA (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span><br>{{dadosDemograficos.razao_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span><br>{{dadosDemograficos.razao_10 | number:'1.2-2' }}</span></div>
                               </div>
                           </div>
                           <hr style="width:95%;text-align:center;margin-left:5">
@@ -224,11 +246,11 @@
                           <div class="row" style="margin-top: 10px;">
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>TAXA DE ANALFABETISMO (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.analfabetismo_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.analfabetismo_10 | number:'1.2-2' }}</span></div>
                               </div>
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span><br>IDH-M (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.idhm_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.idhm_10 | number:'1.2-2' }}</span></div>
                               </div>
                           </div>
                           <hr style="width:95%;text-align:center;margin-left:5">
@@ -236,11 +258,11 @@
                           <div class="row" style="margin-top: 10px;">
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>ESPERANÇA DE VIDA AO NASCER (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span><br>{{dadosDemograficos.evn_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span><br>{{dadosDemograficos.evn_10| number:'1.2-2' }}</span></div>
                               </div>
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>PROPORÇÃO DE PESSOAS DE BAIXA RENDA (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.ppbr_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.ppbr_10| number:'1.2-2' }}</span></div>
                               </div>
                           </div>
                           <hr style="width:95%;text-align:center;margin-left:5">
@@ -249,33 +271,33 @@
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>PORCENTAGEM de adolescentes de 15 a 17
                                       anos de idade que tiveram filhos (2017)<p><br></p></span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p15e17f_17}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p15e17f_17| number:'1.2-2' }}</span></div>
                               </div>
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>porcentagem da população de 25 anos ou mais de idade com ensino fundamental completo (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p25ef_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p25ef_10| number:'1.2-2' }}</span></div>
                               </div>
                           </div>
                           <hr style="width:95%;text-align:center;margin-left:5">
                           <div class="row" style="margin-top: 10px;">
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>porcentagem da população de 25 anos ou mais de idade com ensino médio completo (2010)<p></span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p25em_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p25em_10| number:'1.2-2' }}</span></div>
                               </div>
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>porcentagem da população de 25 anos ou mais de idade com ensino superior completo (2010)<p></span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p25es_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.p25es_10| number:'1.2-2' }}</span></div>
                               </div>
                           </div>
                           <hr style="width:95%;text-align:center;margin-left:5">
                           <div class="row" style="margin-top: 10px;">
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>razão de dependência (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.rzd_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.rzd_10| number:'1.2-2' }}</span></div>
                               </div>
                               <div class="col">
                                   <div class="text-uppercase text-primary font-weight-bold h8  mb-1"><span>TAXA DE TRABALHO INFANTIL (2010)</span></div>
-                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.tif_10}}</span></div>
+                                  <div class="text-dark font-weight-bold h8 mb-0"><span>{{dadosDemograficos.tif_10| number:'1.2-2' }}</span></div>
                               </div>
                           </div>
 

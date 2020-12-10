@@ -76,22 +76,6 @@
     justify-content: center;
 }
 
-.mat-select-panel mat-option.mat-option {
-  height: unset;
-}
-
-.mat-option-text.mat-option-text {
-  white-space: normal;
-}
-
-/deep/ .mat-select-panel mat-option.mat-option {
-  height: unset;
-}
-
-/deep/ .mat-option-text.mat-option-text {
-  white-space: normal;
-}
-
 
 .y14 {
   position: absolute;
