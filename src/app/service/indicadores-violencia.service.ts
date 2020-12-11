@@ -111,7 +111,7 @@ export class IndicadoresViolenciaService {
     let row ='';
 
     for (let index in headerList) {
-        row += headerList[index] + ',';
+        row += headerList[index] + ';';
     }
     row = row.slice(0, -1);
     str += row + '\r\n';
@@ -120,7 +120,7 @@ export class IndicadoresViolenciaService {
         for (let index in headerList) {
            let head = headerList[index];
 
-            line += array[i][head]+',';
+            line += array[i][head]+';';
         }
         line = line.slice(0, -1);
 
