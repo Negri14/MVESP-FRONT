@@ -51,11 +51,8 @@ export class ChartComponent implements OnInit {
 
     });
 
-    this.chartDatasets = [ { data: this.valoresY }];
+    this.chartDatasets = [ { data: this.valoresY, label: 'Número de Ocorrências' }];
     this.chartLabels = this.valoresX;
-
-    console.log('data:',this.chartDatasets);
-    console.log('label:',this.chartLabels);
 
     
   }
